@@ -6,7 +6,6 @@ import {
   Check,
   ImagePlus,
   Layers,
-  Maximize2,
   Palette,
   Pipette,
   Plus,
@@ -211,7 +210,6 @@ export default function Customizer() {
     }
     return "all";
   });
-  const [isCanvasExpanded, setIsCanvasExpanded] = useState(false);
 
   useEffect(() => {
     if (!uploadedImage || !uploadedImage.startsWith("blob:")) return undefined;
@@ -420,20 +418,9 @@ export default function Customizer() {
               </span>
             </div>
 
-            {/* Mobile Expand / Compact toggle */}
-            <button
-              type="button"
-              onClick={() => setIsCanvasExpanded((v) => !v)}
-              aria-label={isCanvasExpanded ? "Compact 3D view" : "Expand 3D view"}
-              className="sm:hidden absolute right-2.5 top-2.5 z-10 flex h-7 items-center gap-1 rounded-full bg-white/90 px-2.5 text-[9px] font-semibold uppercase tracking-wider text-[#24241f] shadow-xs backdrop-blur-md border border-black/10 transition active:scale-95"
-            >
-              <Maximize2 size={10} className={isCanvasExpanded ? "rotate-180" : ""} />
-              <span>{isCanvasExpanded ? "Compact" : "Expand"}</span>
-            </button>
-
             <Suspense
               fallback={
-                <div className={`relative w-full ${isCanvasExpanded ? "h-[280px]" : "h-[175px]"} sm:h-[260px] lg:h-[380px] xl:h-[420px]`}>
+                <div className="relative w-full h-[280px] sm:h-[360px] md:h-[400px] lg:h-[420px] xl:h-[460px]">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -447,11 +434,7 @@ export default function Customizer() {
                 </div>
               }
             >
-              <div className={`transition-all duration-300 w-full ${
-                isCanvasExpanded
-                  ? "h-[280px] sm:h-[360px]"
-                  : "h-[175px] sm:h-[260px] md:h-[320px] lg:h-[380px] xl:h-[420px]"
-              }`}>
+              <div className="w-full h-[280px] sm:h-[360px] md:h-[400px] lg:h-[420px] xl:h-[460px]">
                 {isMug ? (
                   <MugViewer
                     mugColor={mugColor}
