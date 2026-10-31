@@ -647,7 +647,7 @@ export default function ProductViewer({
   });
 
   return (
-    <div className="relative h-full min-h-[220px] w-full select-none sm:min-h-[340px]">
+    <div className="relative h-full min-h-[190px] w-full select-none sm:min-h-[300px]">
       <Canvas
         camera={{ position: [0, 0.15, 4.4], fov: 34 }}
         dpr={[1, 1.5]}

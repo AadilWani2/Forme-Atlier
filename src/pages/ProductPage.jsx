@@ -242,7 +242,7 @@ export default function ProductPage() {
           <div className="mt-6 grid grid-cols-2 gap-3 border-y border-black/[0.08] py-4 text-xs text-[#85847b]">
             <div className="flex items-center gap-2">
               <Check size={15} className="text-[#7c8566] shrink-0" />
-              <span>Typography &amp; Image Wrap</span>
+              <span>Custom Text &amp; Image Wrap</span>
             </div>
             <div className="flex items-center gap-2">
               <ShieldCheck size={15} className="text-[#7c8566] shrink-0" />

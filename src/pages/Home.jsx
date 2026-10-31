@@ -37,7 +37,7 @@ export default function Home() {
 
             <p className="mt-6 max-w-md text-sm leading-7 text-[#686b5c] sm:text-base sm:leading-8">
               Bespoke everyday essentials crafted for personal ritual. Custom
-              colors, authentic tactile materials, and typography previewed in
+              colors, authentic tactile materials, and custom text previewed in
               real-time 3D.
             </p>
 
@@ -157,7 +157,7 @@ export default function Home() {
             number: "02",
             icon: Rotate3D,
             title: "3D Customization",
-            description: "Interact directly with 3D models. Adjust typography, swatches, wrap artwork, and metallic finishes.",
+            description: "Interact directly with 3D models. Add custom text, swatches, wrap artwork, and metallic finishes.",
           },
           {
             number: "03",

@@ -171,7 +171,7 @@ export default function Cart() {
                               : undefined
                           }
                         />
-                        <Detail label="Typography" value={design.textFont} />
+                        <Detail label="Text Font" value={design.textFont} />
                         <Detail
                           label="Artwork"
                           value={

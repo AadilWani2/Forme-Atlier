@@ -6,6 +6,7 @@ import {
   Check,
   ImagePlus,
   Layers,
+  Maximize2,
   Palette,
   Pipette,
   Plus,
@@ -204,7 +205,13 @@ export default function Customizer() {
       (searchParams.get("image") ? searchParams.get("image").split("/").pop() : "")
   );
   const [uploadError, setUploadError] = useState("");
-  const [activeStudioTab, setActiveStudioTab] = useState("all");
+  const [activeStudioTab, setActiveStudioTab] = useState(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      return "palette";
+    }
+    return "all";
+  });
+  const [isCanvasExpanded, setIsCanvasExpanded] = useState(false);
 
   useEffect(() => {
     if (!uploadedImage || !uploadedImage.startsWith("blob:")) return undefined;
@@ -398,7 +405,7 @@ export default function Customizer() {
           Make it yours.
         </h1>
         <p className="mt-2 max-w-xl text-sm leading-6 text-[#85847b] sm:mt-3">
-          Choose a color, add your personalized typography, or upload your own artwork.
+          Choose a color, add your custom text, or upload your own artwork.
         </p>
       </div>
 
@@ -413,9 +420,20 @@ export default function Customizer() {
               </span>
             </div>
 
+            {/* Mobile Expand / Compact toggle */}
+            <button
+              type="button"
+              onClick={() => setIsCanvasExpanded((v) => !v)}
+              aria-label={isCanvasExpanded ? "Compact 3D view" : "Expand 3D view"}
+              className="sm:hidden absolute right-2.5 top-2.5 z-10 flex h-7 items-center gap-1 rounded-full bg-white/90 px-2.5 text-[9px] font-semibold uppercase tracking-wider text-[#24241f] shadow-xs backdrop-blur-md border border-black/10 transition active:scale-95"
+            >
+              <Maximize2 size={10} className={isCanvasExpanded ? "rotate-180" : ""} />
+              <span>{isCanvasExpanded ? "Compact" : "Expand"}</span>
+            </button>
+
             <Suspense
               fallback={
-                <div className="relative h-[250px] w-full sm:h-[360px] lg:h-auto lg:aspect-[4/4.2]">
+                <div className={`relative w-full ${isCanvasExpanded ? "h-[340px]" : "h-[210px]"} sm:h-[340px] lg:h-auto lg:aspect-[4/4.2]`}>
                   <img
                     src={product.image}
                     alt={product.name}
@@ -429,7 +447,11 @@ export default function Customizer() {
                 </div>
               }
             >
-              <div className="h-[250px] w-full sm:h-[360px] md:h-[420px] lg:h-auto lg:aspect-[4/4.2] lg:max-h-[620px]">
+              <div className={`transition-all duration-300 w-full ${
+                isCanvasExpanded
+                  ? "h-[340px] sm:h-[400px]"
+                  : "h-[210px] sm:h-[340px] md:h-[400px] lg:h-auto lg:aspect-[4/4.2] lg:max-h-[620px]"
+              }`}>
                 {isMug ? (
                   <MugViewer
                     mugColor={mugColor}
@@ -506,7 +528,7 @@ export default function Customizer() {
           </div>
 
           <p className="mt-2 text-center text-[11px] text-[#85847b]">
-            ✨ Tip: You can drag typography directly across the 3D model.
+            ✨ Tip: You can drag your text directly across the 3D model.
           </p>
         </div>
 
@@ -532,13 +554,12 @@ export default function Customizer() {
           </div>
 
           {/* Studio Navigation Tabs */}
-          <div className="mt-1 sm:mt-4 flex items-center gap-2 overflow-x-auto border-b border-black/10 pb-3 text-xs scrollbar-none">
+          <div className="mt-2 sm:mt-4 flex items-center gap-1.5 sm:gap-2 overflow-x-auto border-b border-black/10 pb-2.5 text-xs scrollbar-none">
             {[
-              { id: "all", label: "All Options", icon: Layers },
               { id: "palette", label: "Palette & Finish", icon: Palette },
               {
                 id: "text",
-                label: "Typography",
+                label: "Add Text",
                 icon: Type,
                 active: Boolean(personalText?.trim()),
               },
@@ -548,6 +569,7 @@ export default function Customizer() {
                 icon: ImagePlus,
                 active: Boolean(uploadedImage),
               },
+              { id: "all", label: "All Options", icon: Layers },
             ].map((tab) => {
               const Icon = tab.icon;
               const isSelected = activeStudioTab === tab.id;
@@ -656,13 +678,13 @@ export default function Customizer() {
               </div>
             )}
 
-            {/* Typography Section */}
+            {/* Add Text Section */}
             {(activeStudioTab === "all" || activeStudioTab === "text") && (
               <section className={activeStudioTab === "all" ? "border-t border-black/10 pt-6" : ""}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Type size={16} />
-                    <h2 className="text-sm font-medium">Personalized typography</h2>
+                    <h2 className="text-sm font-medium">Add Text</h2>
                     {textLines.filter((l) => l.trim()).length > 0 && (
                       <span className="rounded-full bg-[#eeece5] px-2 py-0.5 text-[10px] font-semibold text-[#7c8566]">
                         {textLines.filter((l) => l.trim()).length}{" "}
@@ -1226,7 +1248,7 @@ export default function Customizer() {
                     }}
                     className="text-xs text-[#85847b] underline underline-offset-4 hover:text-[#24241f]"
                   >
-                    Reset typography layout
+                    Reset text layout
                   </button>
                 </div>
               </div>
