@@ -27,7 +27,7 @@ const COLOR_NAMES = {
 
 function ViewerFallback({ image, name }) {
   return (
-    <div className="relative h-[200px] sm:h-[260px] md:h-[320px] lg:h-[360px] w-full overflow-hidden bg-[#eeece5] flex items-center justify-center p-4 sm:p-6">
+    <div className="relative h-[230px] sm:h-[290px] md:h-[350px] lg:h-[390px] w-full overflow-hidden bg-[#eeece5] flex items-center justify-center p-4 sm:p-6">
       <img src={image} alt={name} className="h-full w-full object-contain opacity-60" />
       <div className="absolute inset-0 flex items-center justify-center bg-black/5 backdrop-blur-xs">
         <span className="rounded-full bg-white/95 px-4 py-2 text-xs font-medium text-[#24241f] shadow-sm">
@@ -87,10 +87,10 @@ export default function ProductPage() {
         <span className="truncate text-[#24241f]">{product.name}</span>
       </div>
 
-      <div className="mt-5 grid grid-cols-1 md:grid-cols-[1.18fr_0.92fr] lg:grid-cols-[1.28fr_0.92fr] xl:grid-cols-[1.35fr_0.9fr] md:items-start gap-6 md:gap-10 lg:gap-14 w-full max-w-full">
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-[1.3fr_0.9fr] lg:grid-cols-[1.4fr_0.9fr] xl:grid-cols-[1.45fr_0.85fr] md:items-start gap-6 md:gap-10 lg:gap-14 w-full max-w-full">
         {/* Left Column: 3D Studio & Photo Switcher */}
         <div className="min-w-0 w-full max-w-full">
-          <div className="relative w-full overflow-hidden rounded-md border border-black/[0.06] bg-[#eeece5] shadow-xs">
+          <div className="relative -mx-3 sm:mx-0 w-auto sm:w-full overflow-hidden rounded-none sm:rounded-md border-y sm:border border-black/[0.06] bg-[#eeece5] shadow-xs">
             {/* View Mode Pill Toggle */}
             <div className="absolute right-2.5 top-2.5 z-10 flex items-center gap-1 rounded-full border border-black/[0.08] bg-white/95 p-1 shadow-xs backdrop-blur-md sm:right-3 sm:top-3">
               <button
@@ -123,7 +123,7 @@ export default function ProductPage() {
               <Suspense
                 fallback={<ViewerFallback image={product.image} name={product.name} />}
               >
-                <div className="relative h-[200px] sm:h-[260px] md:h-[320px] lg:h-[360px] w-full overflow-hidden">
+                <div className="relative h-[230px] sm:h-[290px] md:h-[350px] lg:h-[390px] w-full overflow-hidden">
                   {isMug ? (
                     <MugViewer mugColor={selectedColor} finish="glossy" />
                   ) : (
@@ -136,7 +136,7 @@ export default function ProductPage() {
                 </div>
               </Suspense>
             ) : (
-              <div className="relative h-[200px] sm:h-[260px] md:h-[320px] lg:h-[360px] w-full overflow-hidden flex items-center justify-center p-4 sm:p-6">
+              <div className="relative h-[230px] sm:h-[290px] md:h-[350px] lg:h-[390px] w-full overflow-hidden flex items-center justify-center p-4 sm:p-6">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -147,7 +147,7 @@ export default function ProductPage() {
             )}
           </div>
 
-          <div className="mt-2.5 flex items-center justify-between gap-2 text-[10px] uppercase tracking-wider text-[#85847b] w-full overflow-hidden">
+          <div className="mt-2.5 flex items-center justify-between gap-2 text-[10px] uppercase tracking-wider text-[#85847b] w-full overflow-hidden px-1 sm:px-0">
             <span className="flex items-center gap-1.5 truncate">
               <Rotate3D size={12} className="text-[#7c8566] shrink-0" />
               <span className="sm:hidden">Drag 360° · Pinch zoom</span>

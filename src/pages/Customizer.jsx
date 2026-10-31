@@ -407,9 +407,9 @@ export default function Customizer() {
         </p>
       </div>
 
-      <div className="grid min-w-0 gap-5 pb-8 sm:gap-8 sm:pb-16 lg:grid-cols-[1.25fr_0.85fr] xl:grid-cols-[1.32fr_0.8fr] lg:gap-12">
+      <div className="grid min-w-0 gap-5 pb-8 sm:gap-8 sm:pb-16 lg:grid-cols-[1.3fr_0.85fr] xl:grid-cols-[1.38fr_0.78fr] lg:gap-12">
         <div className="min-w-0 self-start lg:sticky lg:top-24">
-          <div className="relative overflow-hidden rounded-lg border border-black/[0.07] bg-[#eeece5] shadow-xs">
+          <div className="relative -mx-3 sm:mx-0 overflow-hidden rounded-none sm:rounded-lg border-y sm:border border-black/[0.07] bg-[#eeece5] shadow-xs">
             {/* Top 3D Interactive Badge */}
             <div className="absolute left-3 top-3 z-10 flex items-center gap-2 sm:left-3.5 sm:top-3.5">
               <span className="flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#24241f] shadow-xs backdrop-blur-md border border-black/[0.04] sm:px-3 sm:py-1 sm:text-[10px]">
@@ -510,7 +510,7 @@ export default function Customizer() {
             </div>
           </div>
 
-          <p className="mt-2 text-center text-[11px] text-[#85847b]">
+          <p className="mt-2 text-center text-[11px] text-[#85847b] px-3 sm:px-0">
             ✨ Tip: You can drag your text directly across the 3D model.
           </p>
         </div>

@@ -706,7 +706,7 @@ export default function MugViewer({
   return (
     <div className="relative h-full min-h-0 w-full select-none">
       <Canvas
-        camera={{ position: [0, 0.02, 0.49], fov: 36 }}
+        camera={{ position: [0, 0.02, 0.44], fov: 36 }}
         dpr={[1, 1.25]}
         gl={{ antialias: true, alpha: true }}
       >
@@ -748,7 +748,7 @@ export default function MugViewer({
           enableDamping
           dampingFactor={0.06}
           rotateSpeed={0.8}
-          minDistance={0.24}
+          minDistance={0.20}
           maxDistance={0.75}
           minPolarAngle={0.4}
           maxPolarAngle={Math.PI / 2 + 0.15}
