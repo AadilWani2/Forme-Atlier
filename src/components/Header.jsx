@@ -28,10 +28,11 @@ export default function Header({ cartCount = 0 }) {
   return (
     <header className="sticky top-0 z-50 bg-[#faf9f6]/92 backdrop-blur-xl border-b border-black/[0.06] transition-all">
       {/* Editorial Announcement Bar */}
-      <div className="bg-[#24241f] px-4 py-1.5 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-[#eeece5]">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-center gap-2 sm:gap-4">
-          <Sparkles size={11} className="text-[#c8a858]" />
-          <span>Real-time 3D Customization Studio · Handcrafted Precision</span>
+      <div className="bg-[#24241f] px-3 py-1.5 text-center text-[10px] font-medium uppercase tracking-[0.14em] sm:tracking-[0.2em] text-[#eeece5] overflow-hidden">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-center gap-2 sm:gap-4 truncate">
+          <Sparkles size={11} className="text-[#c8a858] shrink-0" />
+          <span className="sm:hidden truncate">Real-time 3D Customization Studio</span>
+          <span className="hidden sm:inline">Real-time 3D Customization Studio · Handcrafted Precision</span>
           <span className="hidden sm:inline opacity-40">/</span>
           <span className="hidden sm:inline text-white/70">Bespoke Monogramming</span>
         </div>

@@ -33,7 +33,7 @@ function AppContent() {
   const { cartCount } = useCart();
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#24241f]">
+    <div className="min-h-screen bg-[#faf9f6] text-[#24241f] overflow-x-hidden">
       <Header cartCount={cartCount} />
       <Routes>
         <Route path="/" element={<Home />} />

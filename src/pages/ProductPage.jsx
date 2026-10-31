@@ -75,46 +75,46 @@ export default function ProductPage() {
   const colorName = COLOR_NAMES[selectedColor] || selectedColor;
 
   return (
-    <main className="mx-auto max-w-[1440px] px-4 py-6 sm:px-8 sm:py-10 lg:px-12">
+    <main className="mx-auto max-w-[1440px] px-4 py-5 sm:px-8 sm:py-10 lg:px-12 w-full max-w-full overflow-x-hidden">
       {/* Breadcrumb Navigation */}
-      <div className="flex items-center gap-2 text-xs text-[#85847b]">
-        <Link to="/shop" className="hover:text-[#24241f] transition-colors">
+      <div className="flex items-center gap-2 text-xs text-[#85847b] truncate">
+        <Link to="/shop" className="hover:text-[#24241f] transition-colors shrink-0">
           Collection
         </Link>
         <span>/</span>
-        <span className="text-[#7c8566] font-medium">{product.category}</span>
+        <span className="text-[#7c8566] font-medium shrink-0">{product.category}</span>
         <span>/</span>
         <span className="truncate text-[#24241f]">{product.name}</span>
       </div>
 
-      <div className="mt-6 grid gap-8 md:grid-cols-2 md:items-start md:gap-10 lg:gap-14">
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 md:items-start gap-6 md:gap-10 lg:gap-14 w-full max-w-full">
         {/* Left Column: 3D Studio & Photo Switcher */}
-        <div className="min-w-0">
-          <div className="relative overflow-hidden rounded-md border border-black/[0.06] bg-[#eeece5] shadow-xs">
+        <div className="min-w-0 w-full max-w-full">
+          <div className="relative w-full overflow-hidden rounded-md border border-black/[0.06] bg-[#eeece5] shadow-xs">
             {/* View Mode Pill Toggle */}
-            <div className="absolute right-3 top-3 z-10 flex items-center gap-1 rounded-full border border-black/[0.08] bg-white/90 p-1 shadow-xs backdrop-blur-md">
+            <div className="absolute right-2.5 top-2.5 z-10 flex items-center gap-1 rounded-full border border-black/[0.08] bg-white/95 p-1 shadow-xs backdrop-blur-md sm:right-3 sm:top-3">
               <button
                 type="button"
                 onClick={() => setViewMode("3d")}
-                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide transition-all sm:px-3.5 sm:text-xs ${
+                className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wide transition-all sm:px-3 sm:text-xs ${
                   viewMode === "3d"
                     ? "bg-[#24241f] text-white shadow-xs"
                     : "text-[#686b5c] hover:text-[#24241f]"
                 }`}
               >
-                <Rotate3D size={13} className={viewMode === "3d" ? "text-white" : "text-[#7c8566]"} />
+                <Rotate3D size={12} className={viewMode === "3d" ? "text-white" : "text-[#7c8566]"} />
                 <span>3D Studio</span>
               </button>
               <button
                 type="button"
                 onClick={() => setViewMode("photo")}
-                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide transition-all sm:px-3.5 sm:text-xs ${
+                className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wide transition-all sm:px-3 sm:text-xs ${
                   viewMode === "photo"
                     ? "bg-[#24241f] text-white shadow-xs"
                     : "text-[#686b5c] hover:text-[#24241f]"
                 }`}
               >
-                <Eye size={13} />
+                <Eye size={12} />
                 <span>Photo</span>
               </button>
             </div>
@@ -147,12 +147,13 @@ export default function ProductPage() {
             )}
           </div>
 
-          <div className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.16em] text-[#85847b]">
-            <span className="flex items-center gap-1.5">
-              <Rotate3D size={13} className="text-[#7c8566]" />
-              <span>Drag to rotate 360° · Scroll to zoom</span>
+          <div className="mt-2.5 flex items-center justify-between gap-2 text-[10px] uppercase tracking-wider text-[#85847b] w-full overflow-hidden">
+            <span className="flex items-center gap-1.5 truncate">
+              <Rotate3D size={12} className="text-[#7c8566] shrink-0" />
+              <span className="sm:hidden">Drag 360° · Pinch zoom</span>
+              <span className="hidden sm:inline">Drag to rotate 360° · Scroll to zoom</span>
             </span>
-            <span>Realistic PBR Shader</span>
+            <span className="shrink-0 text-[9px] sm:text-[10px]">PBR Shader</span>
           </div>
         </div>
 
@@ -252,7 +253,7 @@ export default function ProductPage() {
 
           {/* Spec & Details Tabs */}
           <div className="mt-8">
-            <div className="flex border-b border-black/10">
+            <div className="flex border-b border-black/10 overflow-x-auto scrollbar-none w-full">
               {[
                 { id: "specs", label: "Specifications" },
                 { id: "craft", label: "Atelier Craft" },
@@ -262,7 +263,7 @@ export default function ProductPage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`pb-3 pr-6 text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
+                  className={`pb-3 pr-5 text-xs font-semibold uppercase tracking-[0.12em] whitespace-nowrap shrink-0 transition-colors ${
                     activeTab === tab.id
                       ? "border-b-2 border-[#24241f] text-[#24241f]"
                       : "text-[#85847b] hover:text-[#24241f]"

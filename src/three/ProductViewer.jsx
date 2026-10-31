@@ -649,7 +649,7 @@ export default function ProductViewer({
   return (
     <div className="relative h-full min-h-[190px] w-full select-none sm:min-h-[300px]">
       <Canvas
-        camera={{ position: [0, 0.15, 4.4], fov: 34 }}
+        camera={{ position: [0, 0, 4.8], fov: 32 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
@@ -662,7 +662,7 @@ export default function ProductViewer({
         <directionalLight position={[0, -2, 3]} intensity={0.5} />
         <hemisphereLight skyColor="#ffffff" groundColor="#dad7ce" intensity={0.7} />
 
-        <Center position={[0, -0.05, 0]}>
+        <Center position={[0, 0, 0]}>
           {config ? (
             <GLBProductModel
               productId={productId}
