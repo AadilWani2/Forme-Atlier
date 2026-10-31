@@ -75,7 +75,7 @@ export default function ProductPage() {
   const colorName = COLOR_NAMES[selectedColor] || selectedColor;
 
   return (
-    <main className="mx-auto max-w-[1440px] px-4 py-5 sm:px-8 sm:py-10 lg:px-12 w-full max-w-full overflow-x-hidden">
+    <main className="mx-auto max-w-[1440px] px-3 py-4 sm:px-8 sm:py-10 lg:px-12 w-full max-w-full overflow-x-hidden">
       {/* Breadcrumb Navigation */}
       <div className="flex items-center gap-2 text-xs text-[#85847b] truncate">
         <Link to="/shop" className="hover:text-[#24241f] transition-colors shrink-0">
@@ -87,7 +87,7 @@ export default function ProductPage() {
         <span className="truncate text-[#24241f]">{product.name}</span>
       </div>
 
-      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 md:items-start gap-6 md:gap-10 lg:gap-14 w-full max-w-full">
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-[1.18fr_0.92fr] lg:grid-cols-[1.28fr_0.92fr] xl:grid-cols-[1.35fr_0.9fr] md:items-start gap-6 md:gap-10 lg:gap-14 w-full max-w-full">
         {/* Left Column: 3D Studio & Photo Switcher */}
         <div className="min-w-0 w-full max-w-full">
           <div className="relative w-full overflow-hidden rounded-md border border-black/[0.06] bg-[#eeece5] shadow-xs">

@@ -372,7 +372,7 @@ export default function Customizer() {
   }
 
   return (
-    <main className="mx-auto max-w-[1440px] px-3.5 py-3 pb-28 sm:px-8 sm:py-8 sm:pb-28 lg:px-12 lg:pb-16">
+    <main className="mx-auto max-w-[1440px] px-3 py-3 pb-28 sm:px-8 sm:py-8 sm:pb-28 lg:px-12 lg:pb-16">
       {/* Mobile Top Navigation & Summary */}
       <div className="flex sm:hidden items-center justify-between pb-3 border-b border-black/[0.06] mb-3">
         <Link
@@ -409,7 +409,7 @@ export default function Customizer() {
         </p>
       </div>
 
-      <div className="grid min-w-0 gap-5 pb-8 sm:gap-8 sm:pb-16 lg:grid-cols-[1.12fr_0.88fr] lg:gap-12">
+      <div className="grid min-w-0 gap-5 pb-8 sm:gap-8 sm:pb-16 lg:grid-cols-[1.25fr_0.85fr] xl:grid-cols-[1.32fr_0.8fr] lg:gap-12">
         <div className="min-w-0 self-start lg:sticky lg:top-24">
           <div className="relative overflow-hidden rounded-lg border border-black/[0.07] bg-[#eeece5] shadow-xs">
             {/* Top 3D Interactive Badge */}
