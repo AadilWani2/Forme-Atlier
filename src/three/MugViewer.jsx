@@ -706,7 +706,7 @@ export default function MugViewer({
   return (
     <div className="relative h-full min-h-[220px] w-full select-none sm:min-h-[340px]">
       <Canvas
-        camera={{ position: [0, 0, 0.39], fov: 38 }}
+        camera={{ position: [0, 0.02, 0.44], fov: 36 }}
         dpr={[1, 1.25]}
         gl={{ antialias: true, alpha: true }}
       >

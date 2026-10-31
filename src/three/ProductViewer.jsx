@@ -649,7 +649,7 @@ export default function ProductViewer({
   return (
     <div className="relative h-full min-h-[220px] w-full select-none sm:min-h-[340px]">
       <Canvas
-        camera={{ position: [0, 0.2, 4.0], fov: 36 }}
+        camera={{ position: [0, 0.15, 4.4], fov: 34 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >

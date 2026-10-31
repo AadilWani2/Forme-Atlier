@@ -27,11 +27,11 @@ const COLOR_NAMES = {
 
 function ViewerFallback({ image, name }) {
   return (
-    <div className="relative aspect-[4/5] overflow-hidden bg-[#eeece5]">
-      <img src={image} alt={name} className="h-full w-full object-cover" />
-      <div className="absolute inset-0 flex items-center justify-center bg-black/10 backdrop-blur-xs">
+    <div className="relative h-[290px] sm:h-[370px] md:h-[440px] w-full overflow-hidden bg-[#eeece5] flex items-center justify-center p-4 sm:p-6">
+      <img src={image} alt={name} className="h-full w-full object-contain opacity-60" />
+      <div className="absolute inset-0 flex items-center justify-center bg-black/5 backdrop-blur-xs">
         <span className="rounded-full bg-white/95 px-4 py-2 text-xs font-medium text-[#24241f] shadow-sm">
-          Loading 3D Studio Preview…
+          Loading 3D Studio…
         </span>
       </div>
     </div>
@@ -87,16 +87,16 @@ export default function ProductPage() {
         <span className="truncate text-[#24241f]">{product.name}</span>
       </div>
 
-      <div className="mt-6 grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-start md:gap-12 lg:gap-16">
+      <div className="mt-6 grid gap-8 md:grid-cols-2 md:items-start md:gap-10 lg:gap-14">
         {/* Left Column: 3D Studio & Photo Switcher */}
         <div className="min-w-0">
           <div className="relative overflow-hidden rounded-md border border-black/[0.06] bg-[#eeece5] shadow-xs">
             {/* View Mode Pill Toggle */}
-            <div className="absolute right-3.5 top-3.5 z-10 flex items-center gap-1 rounded-full border border-black/[0.06] bg-white/85 p-1 shadow-sm backdrop-blur-md">
+            <div className="absolute right-3 top-3 z-10 flex items-center gap-1 rounded-full border border-black/[0.08] bg-white/90 p-1 shadow-xs backdrop-blur-md">
               <button
                 type="button"
                 onClick={() => setViewMode("3d")}
-                className={`flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold tracking-wide transition-all ${
+                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide transition-all sm:px-3.5 sm:text-xs ${
                   viewMode === "3d"
                     ? "bg-[#24241f] text-white shadow-xs"
                     : "text-[#686b5c] hover:text-[#24241f]"
@@ -108,7 +108,7 @@ export default function ProductPage() {
               <button
                 type="button"
                 onClick={() => setViewMode("photo")}
-                className={`flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold tracking-wide transition-all ${
+                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide transition-all sm:px-3.5 sm:text-xs ${
                   viewMode === "photo"
                     ? "bg-[#24241f] text-white shadow-xs"
                     : "text-[#686b5c] hover:text-[#24241f]"
@@ -123,7 +123,7 @@ export default function ProductPage() {
               <Suspense
                 fallback={<ViewerFallback image={product.image} name={product.name} />}
               >
-                <div className="relative aspect-[4/3.2] sm:aspect-[4/4.2] max-h-[580px] overflow-hidden">
+                <div className="relative h-[290px] sm:h-[370px] md:h-[440px] w-full overflow-hidden">
                   {isMug ? (
                     <MugViewer mugColor={selectedColor} finish="glossy" />
                   ) : (
@@ -136,12 +136,14 @@ export default function ProductPage() {
                 </div>
               </Suspense>
             ) : (
-              <img
-                src={product.image}
-                alt={product.name}
-                fetchPriority="high"
-                className="aspect-[4/3.2] sm:aspect-[4/4.2] max-h-[580px] w-full object-cover"
-              />
+              <div className="relative h-[290px] sm:h-[370px] md:h-[440px] w-full overflow-hidden flex items-center justify-center p-4 sm:p-6">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  fetchPriority="high"
+                  className="h-full w-full object-contain"
+                />
+              </div>
             )}
           </div>
 
