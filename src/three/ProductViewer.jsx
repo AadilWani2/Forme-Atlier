@@ -647,9 +647,9 @@ export default function ProductViewer({
   });
 
   return (
-    <div className="relative h-full min-h-[190px] w-full select-none sm:min-h-[300px]">
+    <div className="relative h-full min-h-0 w-full select-none">
       <Canvas
-        camera={{ position: [0, 0, 4.8], fov: 32 }}
+        camera={{ position: [0, 0, 6.0], fov: 32 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
@@ -714,8 +714,8 @@ export default function ProductViewer({
           dampingFactor={0.06}
           rotateSpeed={0.8}
           zoomSpeed={0.8}
-          minDistance={2.0}
-          maxDistance={6.5}
+          minDistance={2.8}
+          maxDistance={8.5}
           minPolarAngle={0.2}
           maxPolarAngle={Math.PI * 0.85}
         />

@@ -433,11 +433,11 @@ export default function Customizer() {
 
             <Suspense
               fallback={
-                <div className={`relative w-full ${isCanvasExpanded ? "h-[340px]" : "h-[210px]"} sm:h-[340px] lg:h-auto lg:aspect-[4/4.2]`}>
+                <div className={`relative w-full ${isCanvasExpanded ? "h-[280px]" : "h-[175px]"} sm:h-[260px] lg:h-[380px] xl:h-[420px]`}>
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain p-4"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/10 backdrop-blur-xs">
                     <span className="rounded-full bg-white/95 px-4 py-2 text-xs font-medium text-[#24241f] shadow-sm">
@@ -449,8 +449,8 @@ export default function Customizer() {
             >
               <div className={`transition-all duration-300 w-full ${
                 isCanvasExpanded
-                  ? "h-[340px] sm:h-[400px]"
-                  : "h-[210px] sm:h-[340px] md:h-[400px] lg:h-auto lg:aspect-[4/4.2] lg:max-h-[620px]"
+                  ? "h-[280px] sm:h-[360px]"
+                  : "h-[175px] sm:h-[260px] md:h-[320px] lg:h-[380px] xl:h-[420px]"
               }`}>
                 {isMug ? (
                   <MugViewer

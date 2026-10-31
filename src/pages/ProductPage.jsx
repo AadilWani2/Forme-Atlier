@@ -27,7 +27,7 @@ const COLOR_NAMES = {
 
 function ViewerFallback({ image, name }) {
   return (
-    <div className="relative h-[290px] sm:h-[370px] md:h-[440px] w-full overflow-hidden bg-[#eeece5] flex items-center justify-center p-4 sm:p-6">
+    <div className="relative h-[200px] sm:h-[260px] md:h-[320px] lg:h-[360px] w-full overflow-hidden bg-[#eeece5] flex items-center justify-center p-4 sm:p-6">
       <img src={image} alt={name} className="h-full w-full object-contain opacity-60" />
       <div className="absolute inset-0 flex items-center justify-center bg-black/5 backdrop-blur-xs">
         <span className="rounded-full bg-white/95 px-4 py-2 text-xs font-medium text-[#24241f] shadow-sm">
@@ -123,7 +123,7 @@ export default function ProductPage() {
               <Suspense
                 fallback={<ViewerFallback image={product.image} name={product.name} />}
               >
-                <div className="relative h-[290px] sm:h-[370px] md:h-[440px] w-full overflow-hidden">
+                <div className="relative h-[200px] sm:h-[260px] md:h-[320px] lg:h-[360px] w-full overflow-hidden">
                   {isMug ? (
                     <MugViewer mugColor={selectedColor} finish="glossy" />
                   ) : (
@@ -136,7 +136,7 @@ export default function ProductPage() {
                 </div>
               </Suspense>
             ) : (
-              <div className="relative h-[290px] sm:h-[370px] md:h-[440px] w-full overflow-hidden flex items-center justify-center p-4 sm:p-6">
+              <div className="relative h-[200px] sm:h-[260px] md:h-[320px] lg:h-[360px] w-full overflow-hidden flex items-center justify-center p-4 sm:p-6">
                 <img
                   src={product.image}
                   alt={product.name}

@@ -704,9 +704,9 @@ export default function MugViewer({
   const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <div className="relative h-full min-h-[190px] w-full select-none sm:min-h-[300px]">
+    <div className="relative h-full min-h-0 w-full select-none">
       <Canvas
-        camera={{ position: [0, 0.02, 0.44], fov: 36 }}
+        camera={{ position: [0, 0.02, 0.56], fov: 36 }}
         dpr={[1, 1.25]}
         gl={{ antialias: true, alpha: true }}
       >
