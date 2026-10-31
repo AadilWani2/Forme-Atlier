@@ -214,23 +214,29 @@ function GLBProductModel({
     const fontSize = clamp(Number(textSize) * textScale * 1.55, 24, 320);
 
     // Multi-line wrap calculation matching canvas
-    const words = displayText.split(/\s+/);
+    const rawLines = displayText.split(/\r?\n/);
     const maxLineWidth = config.isCylinder ? 760 : 880;
     const avgCharWidth = fontSize * 0.58 + (Number(textSpacing) || 0);
-    let lineCount = 1;
-    let curLen = 0;
+    let lineCount = 0;
     let maxLen = 0;
 
-    for (const word of words) {
-      const wLen = word.length * avgCharWidth;
-      if (curLen + wLen > maxLineWidth && curLen > 0) {
-        lineCount++;
-        curLen = wLen;
-      } else {
-        curLen += wLen + avgCharWidth;
+    for (const rawLine of rawLines) {
+      const words = rawLine.trim().split(/\s+/).filter(Boolean);
+      if (words.length === 0) continue;
+      lineCount++;
+      let curLen = 0;
+      for (const word of words) {
+        const wLen = word.length * avgCharWidth;
+        if (curLen + wLen > maxLineWidth && curLen > 0) {
+          lineCount++;
+          curLen = wLen;
+        } else {
+          curLen += wLen + avgCharWidth;
+        }
+        maxLen = Math.max(maxLen, curLen);
       }
-      maxLen = Math.max(maxLen, curLen);
     }
+    lineCount = Math.max(1, lineCount);
 
     const lineHeight = fontSize * (fontConfig.lineHeightMultiplier || 1.25);
     const totalHeight = lineCount * lineHeight;
@@ -641,7 +647,7 @@ export default function ProductViewer({
   });
 
   return (
-    <div className="relative h-full min-h-[300px] w-full select-none sm:min-h-[380px]">
+    <div className="relative h-full min-h-[220px] w-full select-none sm:min-h-[340px]">
       <Canvas
         camera={{ position: [0, 0.2, 4.0], fov: 36 }}
         dpr={[1, 1.5]}
@@ -714,10 +720,6 @@ export default function ProductViewer({
           maxPolarAngle={Math.PI * 0.85}
         />
       </Canvas>
-
-      <div className="pointer-events-none absolute bottom-2 left-1/2 w-max max-w-[calc(100%-1rem)] -translate-x-1/2 rounded-full bg-white/90 px-3 py-1.5 text-center text-[9px] font-medium leading-4 text-[#24241f] shadow-sm backdrop-blur-sm sm:bottom-3 sm:px-3.5 sm:text-[11px]">
-        Drag on product to move · Drag background to rotate 360°
-      </div>
     </div>
   );
 }

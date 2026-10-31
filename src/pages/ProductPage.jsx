@@ -123,7 +123,7 @@ export default function ProductPage() {
               <Suspense
                 fallback={<ViewerFallback image={product.image} name={product.name} />}
               >
-                <div className="relative aspect-[4/4.2] max-h-[580px] overflow-hidden">
+                <div className="relative aspect-[4/3.2] sm:aspect-[4/4.2] max-h-[580px] overflow-hidden">
                   {isMug ? (
                     <MugViewer mugColor={selectedColor} finish="glossy" />
                   ) : (
@@ -140,7 +140,7 @@ export default function ProductPage() {
                 src={product.image}
                 alt={product.name}
                 fetchPriority="high"
-                className="aspect-[4/4.2] max-h-[580px] w-full object-cover"
+                className="aspect-[4/3.2] sm:aspect-[4/4.2] max-h-[580px] w-full object-cover"
               />
             )}
           </div>

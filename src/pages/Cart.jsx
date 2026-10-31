@@ -163,7 +163,14 @@ export default function Cart() {
                           )}
                         </div>
 
-                        <Detail label="Personal Text" value={design.personalText ? `"${design.personalText}"` : undefined} />
+                        <Detail
+                          label="Personal Text"
+                          value={
+                            design.personalText
+                              ? `"${design.personalText.split("\n").filter(Boolean).join(" · ")}"`
+                              : undefined
+                          }
+                        />
                         <Detail label="Typography" value={design.textFont} />
                         <Detail
                           label="Artwork"

@@ -190,22 +190,27 @@ export function useArtworkTexture({
           ctx.letterSpacing = `${textSpacing || 0}px`;
         }
 
-        // Word wrap lines
-        const words = displayText.split(/\s+/);
+        // Word wrap lines per line
+        const rawLines = displayText.split(/\r?\n/);
         const lines = [];
-        let curLine = "";
         const maxLineWidth = isCylinder ? 760 : 880;
 
-        for (const word of words) {
-          const candidate = curLine ? `${curLine} ${word}` : word;
-          if (ctx.measureText(candidate).width > maxLineWidth && curLine) {
-            lines.push(curLine);
-            curLine = word;
-          } else {
-            curLine = candidate;
+        for (const rawLine of rawLines) {
+          const trimmed = rawLine.trim();
+          if (!trimmed) continue;
+          const words = trimmed.split(/\s+/).filter(Boolean);
+          let curLine = "";
+          for (const word of words) {
+            const candidate = curLine ? `${curLine} ${word}` : word;
+            if (ctx.measureText(candidate).width > maxLineWidth && curLine) {
+              lines.push(curLine);
+              curLine = word;
+            } else {
+              curLine = candidate;
+            }
           }
+          if (curLine) lines.push(curLine);
         }
-        if (curLine) lines.push(curLine);
 
         const lineHeight = fontSize * (fontConfig.lineHeightMultiplier || 1.25);
 

@@ -8,6 +8,7 @@ import {
   Layers,
   Palette,
   Pipette,
+  Plus,
   Rotate3D,
   ShoppingBag,
   Sparkles,
@@ -134,9 +135,24 @@ export default function Customizer() {
       "#F1EBDD"
   );
   const [finish, setFinish] = useState(savedDesign.finish || "glossy");
-  const [personalText, setPersonalText] = useState(
-    () => savedDesign.personalText ?? searchParams.get("text") ?? ""
-  );
+  const initialText = savedDesign.personalText ?? searchParams.get("text") ?? "";
+  const [textLines, setTextLines] = useState(() => {
+    if (!initialText) return [""];
+    const split = String(initialText).split(/\r?\n/);
+    return split.length > 0 ? split : [""];
+  });
+
+  const personalText = useMemo(() => {
+    return textLines.join("\n");
+  }, [textLines]);
+
+  const setPersonalText = (val) => {
+    if (!val) {
+      setTextLines([""]);
+    } else {
+      setTextLines(String(val).split(/\r?\n/));
+    }
+  };
   const [textColor, setTextColor] = useState(savedDesign.textColor || "#292929");
   const [textFont, setTextFont] = useState(savedDesign.textFont || "sans");
   const [textOrientation, setTextOrientation] = useState(
@@ -226,18 +242,18 @@ export default function Customizer() {
 
   const samplePresets = useMemo(() => {
     if (product?.id === "custom-pen") {
-      return ["Signed with Love", "Make Ideas Happen", "Always Curious", "J. Doe"];
+      return ["Signed with Love", "Always Curious\nEst. 2026", "Make Ideas Happen", "J. Doe\nAtelier"];
     }
     if (product?.id === "custom-bottle") {
-      return ["Stay Hydrated", "Daily Fuel", "Keep Moving", "Form & Flow"];
+      return ["Stay Hydrated", "Form & Flow\nDaily Ritual", "Keep Moving", "Forme Studio\n001 / 100"];
     }
     if (product?.id === "custom-notebook") {
-      return ["Ideas & Notes", "My Diary", "Daily Reflections", "Chapter One"];
+      return ["Personal Diary\nPrivate & Sacred", "Ideas & Notes", "Daily Reflections\n2026", "Chapter One"];
     }
     if (product?.id === "custom-keychain") {
-      return ["Home Sweet Home", "Drive Safe", "Adventure Awaits", "F.S."];
+      return ["Home Sweet Home", "Drive Safe\nWith Love", "Adventure Awaits", "F.S.\n2026"];
     }
-    return ["Good Morning", "Coffee First", "Warm & Cozy", "Made for You"];
+    return ["Good Morning\nCoffee First", "Warm & Cozy", "Made for You", "Atelier Forme\nBespoke"];
   }, [product?.id]);
 
   if (!product) {
@@ -349,16 +365,32 @@ export default function Customizer() {
   }
 
   return (
-    <main className="mx-auto max-w-[1440px] px-4 py-5 pb-28 sm:px-8 sm:py-8 sm:pb-28 lg:px-12 lg:pb-16">
+    <main className="mx-auto max-w-[1440px] px-3.5 py-3 pb-28 sm:px-8 sm:py-8 sm:pb-28 lg:px-12 lg:pb-16">
+      {/* Mobile Top Navigation & Summary */}
+      <div className="flex sm:hidden items-center justify-between pb-3 border-b border-black/[0.06] mb-3">
+        <Link
+          to={`/product/${product.id}`}
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#85847b] active:text-[#24241f]"
+        >
+          <ArrowLeft size={14} />
+          <span>Product</span>
+        </Link>
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold text-[#24241f] truncate max-w-[160px]">{product.name}</span>
+          <span className="rounded-full bg-[#24241f] px-2 py-0.5 text-[10px] font-bold text-white tabular-nums">₹{product.price}</span>
+        </div>
+      </div>
+
+      {/* Desktop Breadcrumbs & Headline */}
       <Link
         to={`/product/${product.id}`}
-        className="inline-flex items-center gap-2 text-xs text-[#85847b] hover:text-[#24241f]"
+        className="hidden sm:inline-flex items-center gap-2 text-xs text-[#85847b] hover:text-[#24241f]"
       >
         <ArrowLeft size={15} />
         Back to product
       </Link>
 
-      <div className="mb-5 mt-4 sm:mb-8 sm:mt-6">
+      <div className="hidden sm:block mb-5 mt-4 sm:mb-8 sm:mt-6">
         <p className="text-[10px] uppercase tracking-[0.2em] text-[#7C8566]">
           Make it personal
         </p>
@@ -370,12 +402,12 @@ export default function Customizer() {
         </p>
       </div>
 
-      <div className="grid min-w-0 gap-6 pb-8 sm:gap-8 sm:pb-16 lg:grid-cols-[1.12fr_0.88fr] lg:gap-12">
+      <div className="grid min-w-0 gap-5 pb-8 sm:gap-8 sm:pb-16 lg:grid-cols-[1.12fr_0.88fr] lg:gap-12">
         <div className="min-w-0 self-start lg:sticky lg:top-24">
           <div className="relative overflow-hidden rounded-lg border border-black/[0.07] bg-[#eeece5] shadow-xs">
             {/* Top 3D Interactive Badge */}
-            <div className="absolute left-3.5 top-3.5 z-10 flex items-center gap-2">
-              <span className="flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#24241f] shadow-xs backdrop-blur-md border border-black/[0.04]">
+            <div className="absolute left-3 top-3 z-10 flex items-center gap-2 sm:left-3.5 sm:top-3.5">
+              <span className="flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#24241f] shadow-xs backdrop-blur-md border border-black/[0.04] sm:px-3 sm:py-1 sm:text-[10px]">
                 <Sparkles size={11} className="text-[#c8a858]" />
                 <span>3D Canvas</span>
               </span>
@@ -383,7 +415,7 @@ export default function Customizer() {
 
             <Suspense
               fallback={
-                <div className="relative aspect-square w-full sm:aspect-[4/4.2]">
+                <div className="relative h-[250px] w-full sm:h-[360px] lg:h-auto lg:aspect-[4/4.2]">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -397,7 +429,7 @@ export default function Customizer() {
                 </div>
               }
             >
-              <div className="aspect-square max-h-[min(76svh,620px)] sm:aspect-[4/4.2]">
+              <div className="h-[250px] w-full sm:h-[360px] md:h-[420px] lg:h-auto lg:aspect-[4/4.2] lg:max-h-[620px]">
                 {isMug ? (
                   <MugViewer
                     mugColor={mugColor}
@@ -480,7 +512,7 @@ export default function Customizer() {
 
         {/* Right Scrollable Panel */}
         <div className="min-w-0">
-          <div className="flex items-start justify-between gap-4 border-b border-black/10 pb-4">
+          <div className="hidden sm:flex items-start justify-between gap-4 border-b border-black/10 pb-4">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#7c8566]">
@@ -500,7 +532,7 @@ export default function Customizer() {
           </div>
 
           {/* Studio Navigation Tabs */}
-          <div className="mt-4 flex items-center gap-2 overflow-x-auto border-b border-black/10 pb-3 text-xs scrollbar-none">
+          <div className="mt-1 sm:mt-4 flex items-center gap-2 overflow-x-auto border-b border-black/10 pb-3 text-xs scrollbar-none">
             {[
               { id: "all", label: "All Options", icon: Layers },
               { id: "palette", label: "Palette & Finish", icon: Palette },
@@ -628,58 +660,108 @@ export default function Customizer() {
             {(activeStudioTab === "all" || activeStudioTab === "text") && (
               <section className={activeStudioTab === "all" ? "border-t border-black/10 pt-6" : ""}>
                 <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Type size={16} />
-                  <h2 className="text-sm font-medium">Personalized typography</h2>
-                </div>
-                {personalText && (
-                  <button
-                    type="button"
-                    onClick={() => setPersonalText("")}
-                    className="text-xs text-[#85847b] hover:text-[#24241f]"
-                  >
-                    Clear text
-                  </button>
-                )}
-              </div>
-
-              <div className="mt-4">
-                <label
-                  htmlFor="personal-text"
-                  className="block text-xs text-[#85847b]"
-                >
-                  Your name, message or signature
-                </label>
-                <input
-                  id="personal-text"
-                  type="text"
-                  maxLength={40}
-                  value={personalText}
-                  onChange={(event) => setPersonalText(event.target.value)}
-                  onFocus={() => setSelectedDesign("text")}
-                  placeholder="e.g. Made just for you"
-                  className="mt-2 h-12 w-full border border-black/15 bg-transparent px-4 text-sm outline-none focus:border-[#7C8566]"
-                />
-
-                {!personalText && (
-                  <div className="mt-2 flex flex-wrap gap-1.5 text-[11px] text-[#85847b]">
-                    <span>Try:</span>
-                    {samplePresets.map((preset) => (
-                      <button
-                        key={preset}
-                        type="button"
-                        onClick={() => {
-                          setPersonalText(preset);
-                          setSelectedDesign("text");
-                        }}
-                        className="rounded-full border border-black/10 bg-[#faf9f6] px-2 py-0.5 hover:border-black/30 hover:text-[#24241f]"
-                      >
-                        "{preset}"
-                      </button>
-                    ))}
+                  <div className="flex items-center gap-2">
+                    <Type size={16} />
+                    <h2 className="text-sm font-medium">Personalized typography</h2>
+                    {textLines.filter((l) => l.trim()).length > 0 && (
+                      <span className="rounded-full bg-[#eeece5] px-2 py-0.5 text-[10px] font-semibold text-[#7c8566]">
+                        {textLines.filter((l) => l.trim()).length}{" "}
+                        {textLines.filter((l) => l.trim()).length === 1 ? "line" : "lines"}
+                      </span>
+                    )}
                   </div>
-                )}
-              </div>
+                  {personalText.trim() && (
+                    <button
+                      type="button"
+                      onClick={() => setPersonalText("")}
+                      className="text-xs text-[#85847b] hover:text-[#24241f]"
+                    >
+                      Clear all text
+                    </button>
+                  )}
+                </div>
+
+                <div className="mt-4 space-y-2.5">
+                  <div className="flex items-center justify-between text-xs text-[#85847b]">
+                    <span>Text lines (rendered one after another)</span>
+                    <span className="text-[10px] text-[#7c8566]">Up to 4 stacked lines</span>
+                  </div>
+
+                  {textLines.map((line, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <span className="flex h-11 w-8 shrink-0 items-center justify-center rounded-sm bg-[#eeece5] text-[10px] font-bold text-[#85847b] border border-black/10">
+                        0{idx + 1}
+                      </span>
+                      <input
+                        type="text"
+                        maxLength={35}
+                        value={line}
+                        onChange={(e) => {
+                          const next = [...textLines];
+                          next[idx] = e.target.value;
+                          setTextLines(next);
+                        }}
+                        onFocus={() => setSelectedDesign("text")}
+                        placeholder={
+                          idx === 0
+                            ? "Line 1: Main text or name"
+                            : idx === 1
+                            ? "Line 2: Subtitle or year"
+                            : idx === 2
+                            ? "Line 3: Edition or location"
+                            : `Line ${idx + 1}: Additional text`
+                        }
+                        className="h-11 flex-1 rounded-sm border border-black/15 bg-white/70 px-3.5 text-sm outline-none transition focus:border-[#7c8566] focus:bg-white"
+                      />
+                      {textLines.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const next = textLines.filter((_, i) => i !== idx);
+                            setTextLines(next.length > 0 ? next : [""]);
+                          }}
+                          title="Remove this line"
+                          className="flex h-11 w-9 shrink-0 items-center justify-center rounded-sm border border-black/10 text-[#85847b] hover:border-black/30 hover:text-[#24241f] hover:bg-white"
+                        >
+                          <X size={15} />
+                        </button>
+                      )}
+                    </div>
+                  ))}
+
+                  {textLines.length < 4 && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setTextLines([...textLines, ""]);
+                        setSelectedDesign("text");
+                      }}
+                      className="mt-1 flex h-10 w-full items-center justify-center gap-2 rounded-sm border border-dashed border-black/20 bg-white/40 text-xs font-semibold text-[#24241f] transition hover:border-[#7c8566] hover:bg-white hover:text-[#7c8566]"
+                    >
+                      <Plus size={14} />
+                      <span>Add another text line (renders one after another)</span>
+                    </button>
+                  )}
+
+                  {!personalText.trim() && (
+                    <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-[11px] text-[#85847b]">
+                      <span>Try:</span>
+                      {samplePresets.map((preset) => (
+                        <button
+                          key={preset}
+                          type="button"
+                          onClick={() => {
+                            setPersonalText(preset);
+                            setSelectedDesign("text");
+                          }}
+                          className="rounded-full border border-black/10 bg-[#faf9f6] px-2.5 py-0.5 hover:border-black/30 hover:text-[#24241f] transition"
+                        >
+                          "{preset.replace("\n", " / ")}"
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
               {/* Font Selection */}
               <div className="mt-5">
@@ -1759,7 +1841,7 @@ export default function Customizer() {
                 </span>
                 {personalText && (
                   <span className="truncate max-w-[85px] text-[10px] text-[#85847b]">
-                    · "{personalText}"
+                    · "{personalText.split("\n").filter(Boolean).join(" · ")}"
                   </span>
                 )}
               </div>
